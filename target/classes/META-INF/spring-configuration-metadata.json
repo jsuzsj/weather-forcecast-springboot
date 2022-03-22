@@ -6,6 +6,11 @@
       "sourceType": "io.renren.datasource.properties.DynamicDataSourceProperties"
     },
     {
+      "name": "renren.jwt",
+      "type": "io.renren.modules.app.utils.JwtUtils",
+      "sourceType": "io.renren.modules.app.utils.JwtUtils"
+    },
+    {
       "name": "spring.datasource.druid",
       "type": "io.renren.datasource.properties.DataSourceProperties",
       "sourceType": "io.renren.datasource.config.DynamicDataSourceConfig",
@@ -17,6 +22,22 @@
       "name": "dynamic.datasource",
       "type": "java.util.Map<java.lang.String,io.renren.datasource.properties.DataSourceProperties>",
       "sourceType": "io.renren.datasource.properties.DynamicDataSourceProperties"
+    },
+    {
+      "name": "renren.jwt.expire",
+      "type": "java.lang.Long",
+      "sourceType": "io.renren.modules.app.utils.JwtUtils",
+      "defaultValue": 0
+    },
+    {
+      "name": "renren.jwt.header",
+      "type": "java.lang.String",
+      "sourceType": "io.renren.modules.app.utils.JwtUtils"
+    },
+    {
+      "name": "renren.jwt.secret",
+      "type": "java.lang.String",
+      "sourceType": "io.renren.modules.app.utils.JwtUtils"
     },
     {
       "name": "spring.datasource.druid.driver-class-name",
