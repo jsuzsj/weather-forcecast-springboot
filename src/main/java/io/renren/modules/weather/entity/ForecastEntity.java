@@ -9,7 +9,7 @@ import lombok.Data;
 
 /**
  * 天气预报管理
- * 
+ *
  * @author zhangsj
  * @email 1836635554@gmail.com
  * @date 2022-03-21 22:38:17
@@ -31,7 +31,7 @@ public class ForecastEntity implements Serializable {
 	/**
 	 * 时间
 	 */
-	private Date date;
+	private String date;
 	/**
 	 * 最高温度
 	 */

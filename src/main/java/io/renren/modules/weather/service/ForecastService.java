@@ -16,5 +16,6 @@ import java.util.Map;
 public interface ForecastService extends IService<ForecastEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+    PageUtils apiqueryPage(Map<String, Object> params);
 }
 

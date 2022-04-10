@@ -41,7 +41,16 @@ public class ForecastController {
 
         return R.ok().put("page", page);
     }
+    /**
+     * 列表
+     */
+    @RequestMapping("/api")
+    @RequiresPermissions("weather:forecast:list")
+    public R apilist(@RequestParam Map<String, Object> params){
+        PageUtils page = forecastService.apiqueryPage(params);
 
+        return R.ok().put("page", page);
+    }
 
     /**
      * 信息

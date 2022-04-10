@@ -8,7 +8,11 @@
 
 package io.renren.modules.sys.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.renren.common.utils.PageUtils;
+import io.renren.common.utils.Query;
 import io.renren.common.utils.R;
 import io.renren.modules.sys.dao.SysUserTokenDao;
 import io.renren.modules.sys.entity.SysUserTokenEntity;
@@ -16,15 +20,26 @@ import io.renren.modules.sys.oauth2.TokenGenerator;
 import io.renren.modules.sys.service.SysUserTokenService;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 
 @Service("sysUserTokenService")
 public class SysUserTokenServiceImpl extends ServiceImpl<SysUserTokenDao, SysUserTokenEntity> implements SysUserTokenService {
-	//12小时后过期
-	private final static int EXPIRE = 3600 * 12;
+	//永不过期
+	private final static long
+			EXPIRE = 86400000L* 365L;
 
+	@Override
+	public PageUtils queryPage(Map<String, Object> params) {
+		IPage<SysUserTokenEntity> page = this.page(
+				new Query<SysUserTokenEntity>().getPage(params),
+				new QueryWrapper<SysUserTokenEntity>()
+		);
 
+		return new PageUtils(page);
+	}
 	@Override
 	public R createToken(long userId) {
 		//生成一个token
@@ -33,8 +48,9 @@ public class SysUserTokenServiceImpl extends ServiceImpl<SysUserTokenDao, SysUse
 		//当前时间
 		Date now = new Date();
 		//过期时间
-		Date expireTime = new Date(now.getTime() + EXPIRE * 1000);
-
+		System.out.println(EXPIRE);
+		Date expireTime = new Date(now.getTime() + EXPIRE);
+		System.out.println(SimpleDateFormat.getDateInstance().format(expireTime));
 		//判断是否生成过token
 		SysUserTokenEntity tokenEntity = this.getById(userId);
 		if(tokenEntity == null){
