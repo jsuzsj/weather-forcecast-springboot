@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.weather.dao.StatisticDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.weather.entity.StatisticEntity" id="staMap">
+        <result property="commentCount" column="commentCount"/>
+        <result property="weatherCount" column="weatherCount"/>
+        <result property="forecastCount" column="forecastCount"/>
+    </resultMap>
+
+    <select id="selectSta" resultMap="staMap">
+        select * from(
+          (select count(*) commentCount from message ) n,
+         (select count(*) weatherCount from weather ) m,
+         (select count(*) forecastCount from forecast) z);
+    </select>
+    <select id="selectWeatherSta" resultType="java.lang.Integer">
+        select wendu from weather limit 100;
+    </select>
+</mapper>
